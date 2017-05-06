@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.css'; //  BOOTSTRAP
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import application from './application.vue'; //MAIN COMPONENT
-import Login from './scripts/components/login.vue'; // LOGIN COMPONENT 
 import Home from './home.vue'; // HOME COMPONENT
 import HomeCustomer from './scripts/components/customer/HomeCustomer.vue'
 import HomeOccupation from './scripts/components/occupation/HomeOccupation.vue'
@@ -22,6 +21,7 @@ Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
 
+
 Vue.use(VueAuth, {
     auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
     http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
@@ -31,17 +31,16 @@ Vue.use(VueAuth, {
     fetchData: {url: 'http://localhost:8000/rest-auth/user/', method: 'GET'}
 });
 
+
 Vue.router =  new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/login', component: Login },
-    { path: '/', redirect: '/login' },
-    { path:'/home', meta:{ auth:'admin' }, component: Home},
-    { path:'/customers', components: {content_type: HomeCustomer}, children: [
+    { path: '/', component: Home },  /* REDIRECT TO HOME PAGE OR LOGIN IF USER IS AUTHENTICATED OR NOT */
+    { path:'/customers', meta: {auth: 'admin'}, components: {content_type: HomeCustomer}, children: [
       {path: '', components:{ customer_procedure: tableCustomers}},
       {path: 'newCustomer', components:{ customer_procedure: newCustomer}}
     ]},
-    { path:'/occupations', component: HomeOccupation}                   
+    { path:'/occupations', meta:{ auth:'admin' }, components: {content_type: HomeOccupation}}                   
     ]
   });
 
