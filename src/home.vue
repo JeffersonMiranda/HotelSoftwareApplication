@@ -1,13 +1,13 @@
 <template>
  <div>
 
- <div v-if="$auth.ready()"> 
+ <div v-if="$auth.check()"> 
   <app-header></app-header>
   <app-content></app-content>
   <app-footer></app-footer>
   </div>
 
-  <div v-if="!$auth.ready()">
+  <div v-if="!$auth.check()">
     <login></login>
   </div>   
 

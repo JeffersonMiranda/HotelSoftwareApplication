@@ -16,20 +16,9 @@ import HomeOccupation from './scripts/components/occupation/HomeOccupation.vue'
 import newCustomer from './scripts/components/customer/newCustomer.vue'
 import tableCustomers from './scripts/components/customer/tableCustomers.vue'
 
-
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
-
-
-Vue.use(VueAuth, {
-    auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
-    http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
-    router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
-    rolesVar: 'type',
-    loginData: {url: 'http://localhost:8000/rest-auth/login/', method: 'POST', redirect: '/home', fetchUser: false},
-    fetchData: {url: 'http://localhost:8000/rest-auth/user/', method: 'GET'}
-});
 
 
 Vue.router =  new VueRouter({
@@ -43,6 +32,17 @@ Vue.router =  new VueRouter({
     { path:'/occupations', meta:{ auth:'admin' }, components: {content_type: HomeOccupation}}                   
     ]
   });
+
+Vue.use(VueAuth, {
+    auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+    http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+    router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+    rolesVar: 'type',
+    loginData: {url: 'http://localhost:8000/rest-auth/login/', method: 'POST', redirect: '/home', fetchUser: false},
+    fetchData: {url: 'http://localhost:8000/rest-auth/user/', method: 'GET'},
+    logoutData: {url: 'http://localhost:8000/rest-auth/logout/', method: 'POST', redirect: '/', makeRequest: true},
+    token: [{request: 'token', response: 'token', authType: 'bearer', foundIn: 'response'}]
+});
 
 const router = Vue.router;
 

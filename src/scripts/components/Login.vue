@@ -13,7 +13,7 @@
         </div>
         
     </div>
-
+        
 </div>
 
 </template>
@@ -41,13 +41,14 @@ export default {
                     password: this.user.password
                 },
                 success: function(){
-                    alert("Login successfull")
+                    alert("Login successfull");
+                    alert(JSON.stringify(this.$auth.user()));
                 },
                 error: function(){
                     alert("Error")
                 },
                 rememberMe: true,
-                redirect: '/home'
+                redirect: '/'
             })
         }
 
