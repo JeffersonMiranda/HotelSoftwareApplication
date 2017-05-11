@@ -48,7 +48,7 @@ export default {
                     alert("Error")
                 },
                 rememberMe: true,
-                redirect: '/'
+                redirect: '/home'
             })
         }
 
