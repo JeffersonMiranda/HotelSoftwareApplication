@@ -18,21 +18,42 @@ import tableCustomers from './scripts/components/customer/tableCustomers.vue'
 
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
-Vue.use(VueAxios);
+Vue.use(VueAxios,axios);
 
 
-const router =  new VueRouter({
+Vue.router =  new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: Home },  /* REDIRECT TO HOME PAGE OR LOGIN IF USER IS AUTHENTICATED OR NOT */
-    { path:'/customers', components: {content_type: HomeCustomer}, children: [
+    { path:'/customers', meta: {auth: 'admin'}, components: {content_type: HomeCustomer}, children: [
       {path: '', components:{ customer_procedure: tableCustomers}},
       {path: 'newCustomer', components:{ customer_procedure: newCustomer}}
     ]},
-    { path:'/occupations', components: {content_type: HomeOccupation}}                   
+    { path:'/occupations', meta: {auth: 'admin'}, components: {content_type: HomeOccupation}}                   
     ]
   });
 
+Vue.use(VueAuth, {
+    auth: { request: function (req, token) {
+      this.options.http._setHeaders.call(this, req, {Authorization: 'Bearer ' + token})
+    },
+     response: function (res) {
+      var token = res.data.token
+      if (token) {
+        token = token.split('Bearer ');
+        return token[token.length > 1 ? 1 : 0]
+      }
+     }
+    },
+    http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+    router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+    rolesVar: 'type',
+    loginData: {url: 'http://localhost:8000/rest-auth/login/', method: 'POST', redirect: '/home', fetchUser: false},
+    fetchData: {url: 'http://localhost:8000/rest-auth/user/', method: 'GET'},
+    logoutData: {url: 'http://localhost:8000/rest-auth/logout/', method: 'POST', redirect: '/', makeRequest: true}
+});
+
+const router = Vue.router;
 
 export default new Vue({
   el: 'body',

@@ -14,6 +14,7 @@
         
     </div>
         
+
 </div>
 
 </template>
@@ -34,7 +35,6 @@ export default {
     methods: {
         handleSubmit: function(e){
             e.preventDefault();
-
             this.$auth.login({
                 data: {
                     username: this.user.username,
