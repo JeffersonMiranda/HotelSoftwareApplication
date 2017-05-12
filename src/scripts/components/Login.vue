@@ -41,13 +41,11 @@ export default {
                     password: this.user.password
                 },
                 success: function(){
-                    alert("Login successfull");
-                    alert(JSON.stringify(this.$auth.user()));
+                    console.log(JSON.stringify(this.$auth.user()));
                 },
                 error: function(){
-                    alert("Error")
+                    alert("Error");
                 },
-                rememberMe: true,
                 redirect: '/home'
             })
         }
