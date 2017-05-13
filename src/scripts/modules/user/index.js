@@ -1,18 +1,21 @@
-import { api } from './../api.js';
-
 export default {
 
-  state: {
-    
-  },
-  mutations: {
-  
-  },
-  actions: {
- 
- 
-  },
-  getters: {
-  
- }
+state: {
+   username: "",
+   email: "",
+   isAuthenticated: false
+},
+
+mutations: {
+
+},
+
+actions: {  
+
+},
+
+getters: {
+
+}
+
 };

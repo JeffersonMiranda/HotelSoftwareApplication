@@ -8,7 +8,7 @@
 
               <b-form-input v-model="user.password" type="password" placeholder="Password" required></b-form-input>
 
-                   <b-button variant="primary" @click="handleSubmit($event)"> Login </b-button>
+                   <b-button variant="primary" @click="login($event)"> Login </b-button>
             </form>
         </div>
         
@@ -21,37 +21,43 @@
 
 <script>
 
+import {mapGetters,mapActions} from 'vuex';
+import { api } from './../modules/api.js';
+import store from 'store2';
+
 export default {
 
-    data(){
-        return{
-           user:{ 
+    data() {
+        return {
+           user: { 
             username : "",
             password: ""
             }
         }
     },
-
     methods: {
-        handleSubmit: function(e){
-            e.preventDefault();
-            this.$auth.login({
-                data: {
-                    username: this.user.username,
-                    password: this.user.password
-                },
-                success: function(){
-                    console.log(JSON.stringify(this.$auth.user()));
-                },
-                error: function(){
-                    alert("Error");
-                },
-                redirect: '/home'
-            })
+         login: function (e) {
+          e.preventDefault();
+
+          api.post('rest-auth/login/', {
+                username: this.user.username,
+                password: this.user.password
+          }).then(function (response) {
+            if (response.status === 200 && 'token' in response.data) {
+              store.session('jwt', response.data.token);
+              api.defaults.headers.common['Authorization'] = 'JWT ' + response.data.token;
+            }                 
+          }).catch(function(error){
+              console.log(error);
+          });
+          
+          api.get('customers/', { headers: { 'Authorization': 'JWT '+ store.session('jwt') },timeout :4000})  // NECESSITA DE CREDENCIAIS PARA PODER RETORNAR DADOS
+          .then(function(response){
+            console.log(response.data);
+          });
+
         }
-
     }
-
 }
 
 </script>

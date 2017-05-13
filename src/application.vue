@@ -1,16 +1,8 @@
 <template>
   <!-- REDIRECT TO HOME OR LOGIN DEPENDING ON AUTHORIZATION -->
   <div>
-  
-    <div v-if="$auth.ready()">
-  
-      <div v-if="$auth.check()">
-        <home></home>
-      </div>
-  
-      <div v-if="!$auth.check()">
-        <login></login>
-      </div>
+
+   <login></login>
   
     </div>
   
