@@ -80,9 +80,12 @@
     </br>
 
     <div class="row">
-    <div class="col-md-4">
-        <b-button variant="primary" @click.prevent="saveCustomer()">
-          Save customer
+    <div class="col-md-6">
+        <b-button variant="primary" @click.prevent="updateCust()">
+          Save modifications
+        </b-button>
+         <b-button variant="primary" @click.prevent="backToCustomersList()">
+          Back to customers list
         </b-button>
     </div>
     </div>
@@ -101,17 +104,7 @@ export default {
 
  data() {
    return {
-     customer: { //CUSTOMER TO SAVE IN DATABASE  
-        firstName:"",
-        lastName:"",
-        street: "",
-        city: "",
-        state: "",
-        country:"",
-        phoneNumber:"",
-        age:"",
-        sex:""
-     },  
+     customer: [],  
      selected: [],   
      options:[
         { 
@@ -127,18 +120,23 @@ export default {
  },
  methods:{
      ...mapActions([
-         'postCustomer'
+         'updateCustomer'
      ]),
-     saveCustomer: function(){
-         this.postCustomer(this.customer)
+     updateCust: function(){
+         this.updateCustomer(this.customer)
          .then( response => { 
-             alert("User saved !",  this.customer = [] );  // CLEAN CUSTOMER FORMS IN A CALL BACK 
-               
+             alert("User updated !");  // CLEAN CUSTOMER FORMS IN A CALL BACK               
             })
          .catch( response => { alert("Error") })
              
+     },
+     backToCustomersList: function(){
+           this.$router.push('/customers');      
      }
- }
+ },
+  created: function() {
+      this.customer = this.$route.params.customer;       
+   }
 }
 
 </script>

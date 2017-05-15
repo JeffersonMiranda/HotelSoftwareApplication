@@ -2,7 +2,7 @@
    <div>
   <div class="row">
     <div class="col-md-2">
-    <b-button variant="primary" to="/customers/newCustomer"> New customer </b-button>
+    <b-button variant="primary" to="/employees/newEmployee"> New employee </b-button>
     </div> 
     
      <div class="col-md-8 col-md-offset-2">
@@ -15,7 +15,7 @@
   <!-- Main table element -->
   <b-table striped hover :items="customersData()" :fields="fields" :current-page="currentPage" :per-page="perPage" :filter="filter">
     <template slot="consultButton" scope="item">
-     <b-button variant="primary" size="sm" :to="{name:'consultationCustomer', params: { customer: item.item }}"> <!-- BUTTON TO CONSULT CUSTOMER-->
+     <b-button variant="primary" size="sm" :to="{name:'consultationEmployee', params: { employee: item.item }}"> <!-- BUTTON TO CONSULT CUSTOMER-->
           Consult
         </b-button>
 
@@ -24,7 +24,7 @@
   </div>
 
     <div class="justify-content-center row my-1">
-    <b-pagination size="md" :total-rows="this.customersData().length" :per-page="perPage" v-model="currentPage" />
+    <b-pagination size="md" :total-rows="this.employeesData().length" :per-page="perPage" v-model="currentPage" />
     </div>
 
   </div>
@@ -79,19 +79,19 @@ export default {
  },
 methods:{
   ...mapActions([
-     'setCustomers'
+     'setEmployees'
   ]),
   ...mapGetters([
-    'getCustomers'
+    'getEmployees'
   ])
 },
 computed: {
   customersData(){
-     return this.getCustomers;  
+     return this.getEmployees;  
   }
 },
 created: function(){
-    this.setCustomers();   
+    this.setEmployees();   
   }
 }
 

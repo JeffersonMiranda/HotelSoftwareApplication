@@ -6,13 +6,13 @@
     
     <div class="col-md-4">
     <b-input-group left="First Name">
-    <b-form-input v-model="customer.firstName" required></b-form-input>
+    <b-form-input v-model="employee.firstName" required></b-form-input>
     </b-input-group>
     </div>
 
     <div class="col-md-8">
     <b-input-group left="Last Name">
-    <b-form-input  v-model="customer.lastName" required></b-form-input>
+    <b-form-input  v-model="employee.lastName" required></b-form-input>
     </b-input-group> 
     </div> 
      
@@ -23,13 +23,13 @@
 
     <div class="col-md-2">
     <b-input-group left="Age">
-    <b-form-input v-model="customer.age" type="number"></b-form-input>
+    <b-form-input v-model="employee.age" type="number"></b-form-input>
     </b-input-group>   
     </div>
 
     <div class="col-md-2">
     <b-input-group left="Sex">
-    <b-form-select v-model="customer.sex" 
+    <b-form-select v-model="employee.sex" 
                    :options="options">
     </b-form-select>
     </b-input-group>
@@ -37,7 +37,7 @@
 
     <div class="col-md-8">
     <b-input-group left="Phone Number">
-    <b-form-input v-model="customer.phoneNumber" type="number"></b-form-input>
+    <b-form-input v-model="employee.phoneNumber" type="number"></b-form-input>
     </b-input-group>       
     </div>
 
@@ -49,19 +49,19 @@
 
     <div class="col-md-6">
     <b-input-group left="Street">
-    <b-form-input v-model="customer.street"></b-form-input>
+    <b-form-input v-model="employee.street"></b-form-input>
     </b-input-group>   
     </div>
 
     <div class="col-md-4">
     <b-input-group left="City">
-    <b-form-input v-model="customer.city"></b-form-input>
+    <b-form-input v-model="employee.city"></b-form-input>
     </b-input-group>
     </div>
 
     <div class="col-md-2">
     <b-input-group left="State">
-    <b-form-input v-model="customer.state"></b-form-input>
+    <b-form-input v-model="employee.state"></b-form-input>
     </b-input-group>       
     </div>
 
@@ -71,7 +71,7 @@
     <div class="row">
     <div class="col-md-6">
     <b-input-group left="Country">
-    <b-form-input v-model="customer.country"></b-form-input>
+    <b-form-input v-model="employee.country"></b-form-input>
     </b-input-group>   
     </div>
 
@@ -81,8 +81,8 @@
 
     <div class="row">
     <div class="col-md-4">
-        <b-button variant="primary" @click.prevent="saveCustomer()">
-          Save customer
+        <b-button variant="primary" @click.prevent="saveEmployee()">
+          Save employee
         </b-button>
     </div>
     </div>
@@ -101,7 +101,7 @@ export default {
 
  data() {
    return {
-     customer: { //CUSTOMER TO SAVE IN DATABASE  
+     employee: { //EMPLOYEE TO SAVE IN DATABASE  
         firstName:"",
         lastName:"",
         street: "",
@@ -127,12 +127,12 @@ export default {
  },
  methods:{
      ...mapActions([
-         'postCustomer'
+         'postEmployee'
      ]),
-     saveCustomer: function(){
-         this.postCustomer(this.customer)
+     saveEmployee: function(){
+         this.postEmployee(this.employee)
          .then( response => { 
-             alert("User saved !",  this.customer = [] );  // CLEAN CUSTOMER FORMS IN A CALL BACK 
+             alert("Employee saved !",  this.employee = [] );  // CLEAN EMPLOYEE FORMS IN A CALL BACK 
                
             })
          .catch( response => { alert("Error") })
