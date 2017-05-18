@@ -1,11 +1,11 @@
 <template>
   <div>
   
-  <h5 id="main_title">Employees </h5>  
+  <h5 id="main_title">Payments </h5>  
 
   <div class="row">    
   <div class="col-md-12">
-  <router-view name="employee_procedure"></router-view><!-- KIND OF PROCEDURE (EDIT, NEW, DELETE, CONSULTATION...) -->
+  <router-view name="payment_procedure"></router-view><!-- KIND OF PROCEDURE (EDIT, NEW, DELETE, CONSULTATION...) -->
   </div>
   </div>
 

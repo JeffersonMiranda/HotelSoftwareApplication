@@ -21,6 +21,7 @@ import login from './scripts/components/Login.vue';
 import home from './home.vue';
 import store from 'store2';
 import { mapGetters } from 'vuex';
+
 export default {
   components: {
     login,

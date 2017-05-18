@@ -1,4 +1,4 @@
-import { api } from './../api.js';
+import { api,helpers } from './../api.js';
 
 export default {
 
@@ -14,10 +14,14 @@ export default {
 
   actions: {
     setCustomers({commit}){  // RETRIEVE ALL CUSTOMERS FROM DATABASE AND INSERT IN STATE
-      api.get('customers/').then((response) => {
-       commit('SETCUSTOMERS',response.data);
-      }).catch(function (error) {
-        console.log(error);
+       return new Promise((resolve,reject) => {       
+        api.get('customers/').then(function(response){ // url: customer/
+          commit('SETCUSTOMERS',response.data);
+          resolve(response);        
+      }).catch(function(error){
+          reject(error);
+      });
+
      });
    },
    postCustomer({commit},data){  // INSERT NEW CUSTOMER ON DATABASE

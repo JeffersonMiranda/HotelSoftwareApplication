@@ -15,7 +15,7 @@
         <b-nav-item to="/occupations">Occupations</b-nav-item>
         <b-nav-item to="/rooms">Rooms</b-nav-item>
         <b-nav-item to="/payments">Payments</b-nav-item>      
-        <b-nav-item to="/employes">Employees</b-nav-item>
+        <b-nav-item to="/employees">Employees</b-nav-item>
       </b-nav>    
 
      </b-collapse>
