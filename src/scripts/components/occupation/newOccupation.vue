@@ -3,7 +3,7 @@
     
     <div v-if="!loading">
 
-    <form>
+    <form id="occupationForm">
 
     <div class="row">
     
@@ -63,8 +63,6 @@
         <spinner></spinner>
     </div>
 
- {{ occupation }}
- {{ payment }}
  </div>
 </template>
 
@@ -109,8 +107,8 @@ export default {
             this.postPayment(this.payment).then(response =>   // CREATE THE PAYMENT FOR THE OCCUPATION
                 {
                     alert("Occupation saved !");
-                    this.occupation = [],   // CLEAN OCCUPATION FORMS IN A CALL BACK 
-                    this.payment = [];
+                    for(var e in this.occupation) { this.occupation[e] = ""}   // CLEAN OCCUPATION OBJECT IF SUCCESSFULL
+                    for(var e in this.payment) { this.payment[e] = ""} // CLEAN PAYMENT OBJECT IF SUCCESSFULL
                 })
                     .catch(error => { alert(error) });
         }).catch(error => { alert(error) });
