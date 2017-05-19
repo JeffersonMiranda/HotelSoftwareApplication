@@ -5,7 +5,7 @@ import store from './scripts/store.js';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueSession from 'vue-session';
-import Spinner from 'vue-simple-spinner'; 
+import Spinner from 'vue-simple-spinner';
 
 import 'bootstrap/dist/css/bootstrap.css'; //  BOOTSTRAP
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -40,47 +40,66 @@ import makePayment from './scripts/components/payment/makePayment.vue';
 import tablePayments from './scripts/components/payment/tablePayments.vue';
 import consultationPayment from './scripts/components/payment/consultationPayment.vue';
 
+import HomeReports from './scripts/components/reports/HomeReports.vue';
+
 Vue.use(VueRouter);
 Vue.use(VueSession);
 Vue.use(BootstrapVue);
-Vue.use(VueAxios,axios);
+Vue.use(VueAxios, axios);
 Vue.component('spinner', Spinner); // SPINNER TO SHOW IN UNLOADED PAGES
 
 
-const router =  new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   routes: [
     { path: '/', component: Home },  /* REDIRECT TO HOME PAGE OR LOGIN IF USER IS AUTHENTICATED OR NOT */
-    { path:'/customers', components: {content_type: HomeCustomer}, children: [
-      {path: '', components:{ customer_procedure: tableCustomers}},
-      {path: 'newCustomer', components:{ customer_procedure: newCustomer}},
-      {path: 'consultationCustomer/:customer', name:'consultationCustomer', components:{ customer_procedure: consultationCustomer}},
-      {path: 'editCustomer/:customer', name:'editCustomer', components:{ customer_procedure: editCustomer}}
-    ]},
-    { path:'/occupations', components: {content_type: HomeOccupation}, children: [
-      {path: '', components:{ occupation_procedure: tableOccupations}},
-      {path: 'newOccupation', components:{ occupation_procedure: newOccupation}},
-      {path: 'consultationOccupation', name:'consultationOccupation', components:{ occupation_procedure: consultationOccupation}}
-    ]},     
-     { path:'/rooms', components: {content_type: HomeRoom}, children: [
-      {path: '', components:{ room_procedure: tableRooms}},
-      {path: 'newRoom', components:{ room_procedure: newRoom}},
-      {path: 'consultationRoom/:room', name:'consultationRoom', components:{ room_procedure: consultationRoom}},
-      {path: 'editRoom/:room', name:'editRoom', components:{ room_procedure: editRoom}}
-    ]},
-      {path:'/employees', components: {content_type: HomeEmployee}, children: [
-      {path: '', components:{ employee_procedure: tableEmployees}},
-      {path: 'newEmployee', components:{ employee_procedure: newEmployee}},
-      {path: 'consultationEmployee/:employee', name:'consultationEmployee', components:{ employee_procedure: consultationEmployee}},
-      {path: 'editEmployee/:employee', name:'editEmployee', components:{ employee_procedure: editEmployee}}     
-    ]},     
-      {path:'/payments', components: {content_type: HomePayment}, children: [
-      {path: '', components:{ payment_procedure: tablePayments}},
-      {path: 'makePayment', components:{ payment_procedure: makePayment}},
-      {path: 'consultationPayment/:payment', name:'consultationPayment', components:{ payment_procedure: consultationPayment}}   
-    ]}             
-    ]
-  });
+    {
+      path: '/customers', components: { content_type: HomeCustomer }, children: [
+        { path: '', components: { customer_procedure: tableCustomers } },
+        { path: 'newCustomer', components: { customer_procedure: newCustomer } },
+        { path: 'consultationCustomer/:customer', name: 'consultationCustomer', components: { customer_procedure: consultationCustomer } },
+        { path: 'editCustomer/:customer', name: 'editCustomer', components: { customer_procedure: editCustomer } }
+      ]
+    },
+    {
+      path: '/occupations', components: { content_type: HomeOccupation }, children: [
+        { path: '', components: { occupation_procedure: tableOccupations } },
+        { path: 'newOccupation', components: { occupation_procedure: newOccupation } },
+        { path: 'consultationOccupation', name: 'consultationOccupation', components: { occupation_procedure: consultationOccupation } }
+      ]
+    },
+    {
+      path: '/rooms', components: { content_type: HomeRoom }, children: [
+        { path: '', components: { room_procedure: tableRooms } },
+        { path: 'newRoom', components: { room_procedure: newRoom } },
+        { path: 'consultationRoom/:room', name: 'consultationRoom', components: { room_procedure: consultationRoom } },
+        { path: 'editRoom/:room', name: 'editRoom', components: { room_procedure: editRoom } }
+      ]
+    },
+    {
+      path: '/employees', components: { content_type: HomeEmployee }, children: [
+        { path: '', components: { employee_procedure: tableEmployees } },
+        { path: 'newEmployee', components: { employee_procedure: newEmployee } },
+        { path: 'consultationEmployee/:employee', name: 'consultationEmployee', components: { employee_procedure: consultationEmployee } },
+        { path: 'editEmployee/:employee', name: 'editEmployee', components: { employee_procedure: editEmployee } }
+      ]
+    },
+    {
+      path: '/payments', components: { content_type: HomePayment }, children: [
+        { path: '', components: { payment_procedure: tablePayments } },
+        { path: 'makePayment', components: { payment_procedure: makePayment } },
+        { path: 'consultationPayment/:payment', name: 'consultationPayment', components: { payment_procedure: consultationPayment } }
+      ]
+    },
+    {
+      path: '/reports', components: { content_type: HomeReports }, children: [
+        //    {path: '', components:{ payment_procedure: tablePayments}},
+        //  {path: 'makePayment', components:{ payment_procedure: makePayment}},
+        //   {path: 'consultationPayment/:payment', name:'consultationPayment', components:{ payment_procedure: consultationPayment}}   
+      ]
+    }
+  ]
+});
 
 export default new Vue({
   el: 'body',
