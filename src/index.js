@@ -41,6 +41,7 @@ import tablePayments from './scripts/components/payment/tablePayments.vue';
 import consultationPayment from './scripts/components/payment/consultationPayment.vue';
 
 import HomeReports from './scripts/components/reports/HomeReports.vue';
+import customersBySex from './scripts/components/reports/customers/customersBySex.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueSession);
@@ -93,9 +94,8 @@ const router = new VueRouter({
     },
     {
       path: '/reports', components: { content_type: HomeReports }, children: [
-        //    {path: '', components:{ payment_procedure: tablePayments}},
-        //  {path: 'makePayment', components:{ payment_procedure: makePayment}},
-        //   {path: 'consultationPayment/:payment', name:'consultationPayment', components:{ payment_procedure: consultationPayment}}   
+        //     {path: '', components:{ reports_procedure: tablePayments}},  // MAYBE IN FUTURE FOR REPORTS QUICK MENU 
+        { path: 'customersBySex', components: { reports_procedure: customersBySex } },
       ]
     }
   ]
