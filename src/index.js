@@ -4,8 +4,9 @@ import BootstrapVue from 'bootstrap-vue';
 import store from './scripts/store.js';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import VueSession from 'vue-session';
 import Spinner from 'vue-simple-spinner';
+
+import CustomersPlugin from './scripts/plugins/CustomersPlugin.js'; // PLUGIN FOR CUSTOMERS SERVICE
 
 import 'bootstrap/dist/css/bootstrap.css'; //  BOOTSTRAP
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -44,11 +45,10 @@ import HomeReports from './scripts/components/reports/HomeReports.vue';
 import customersBySex from './scripts/components/reports/customers/customersBySex.vue';
 
 Vue.use(VueRouter);
-Vue.use(VueSession);
 Vue.use(BootstrapVue);
-Vue.use(VueAxios, axios);
+Vue.use(VueAxios,axios);
+Vue.use(CustomersPlugin);
 Vue.component('spinner', Spinner); // SPINNER TO SHOW IN UNLOADED PAGES
-
 
 const router = new VueRouter({
   mode: 'history',

@@ -1,5 +1,6 @@
 import { api } from './../api.js';
-import store from 'store2';
+import store from 'store2'; // LIB TO MANAGE SESSIONS 
+import Vue from 'vue';
 
 export default {
 
@@ -25,6 +26,7 @@ actions: {
             if (response.status === 200 && 'token' in response.data) {              
               store.session('jwt', response.data.token); // SET SESSION FOR TOKEN 
               api.defaults.headers['Authorization'] = 'JWT ' + response.data.token; // SET HEADER FOR AUTHORIZATION
+              Vue.axios.defaults.headers['Authorization'] = 'JWT ' + response.data.token; // TESTING 
               commit('SETUSER',user,true);   
             }                 
           }).catch(function(error){
