@@ -1,4 +1,4 @@
-import { api } from './../api.js';
+import * as employeeService from './../../services/employees/';
 
 export default {
 
@@ -15,7 +15,7 @@ export default {
   actions: {
     setEmployees({commit}){  // RETRIEVE ALL EMPLOYEES FROM DATABASE AND INSERT IN STATE
      return new Promise((resolve,reject) => {       
-        api.get('employees/').then(function(response){ // url: customer/
+        employeeService.getEmployees().then(function(response){ // url: customer/
           commit('SETEMPLOYEES',response.data);
           resolve(response);        
       }).catch(function(error){
@@ -25,7 +25,7 @@ export default {
    },
    postEmployee({commit},data){  // INSERT NEW EMPLOYEE ON DATABASE
      return new Promise((resolve,reject) => {       
-        api.post('employees/', data).then(function(response){ // url: employee/
+        employeeService.createEmployee(data).then(function(response){ // url: employee/
           resolve(response);        
       }).catch(function(error){
           reject(error);
@@ -35,7 +35,7 @@ export default {
    },
    deleteEmployee({commit},id){
      return new Promise((resolve,reject) => {       
-        api.delete('employees/'+id+'/').then(function(response){  // url: employee/1/
+        employeeService.delete(id).then(function(response){  // url: employee/1/
           resolve(response);        
       }).catch(function(error){
           reject(error);
@@ -44,7 +44,7 @@ export default {
    },
    updateEmployee({commit},data){  // INSERT NEW EMPLOYEE ON DATABASE
      return new Promise((resolve,reject) => {       
-        api.put('employees/'+data.id+'/', data).then(function(response){ // url: employee/1/ + data
+        employeeService.put(data).then(function(response){ // url: employee/1/ + data
           resolve(response);        
       }).catch(function(error){
           reject(error);

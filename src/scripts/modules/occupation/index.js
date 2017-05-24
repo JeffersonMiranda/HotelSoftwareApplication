@@ -1,4 +1,4 @@
-import { api,helpers } from './../api.js';
+import * as occupationService from './../../services/occupations/';
 
 export default {
 
@@ -15,7 +15,7 @@ export default {
   actions: {
     setOccupations({commit}){  // RETRIEVE ALL OCCUPATIONS FROM DATABASE AND INSERT IN STATE
      return new Promise((resolve,reject) => {       
-        api.get('occupations' + helpers.getAll).then(function(response){ // url: customer/
+        occupationService.getOccupations().then(function(response){ // url: customer/
           commit('SETOCCUPATIONS',response.data);
           resolve(response);        
       }).catch(function(error){
@@ -25,7 +25,7 @@ export default {
    },
    postOccupation({commit},data){  // INSERT NEW OCCUPATION ON DATABASE
      return new Promise((resolve,reject) => {       
-        api.post('occupations/', data).then(function(response){ // url: occupation/
+        occupationService.createOccupation(data).then(function(response){ // url: occupation/
           resolve(response);        
       }).catch(function(error){
           reject(error);
@@ -35,7 +35,7 @@ export default {
    },
    deleteOccupation({commit},id){
      return new Promise((resolve,reject) => {       
-        api.delete('occupations/'+id+'/').then(function(response){  // url: occupation/1/
+        occupationService.deleteOccupation(id).then(function(response){  // url: occupation/1/
           resolve(response);        
       }).catch(function(error){
           reject(error);
@@ -44,7 +44,7 @@ export default {
    },
    updateOccupation({commit},data){  // INSERT NEW OCCUPATION ON DATABASE
      return new Promise((resolve,reject) => {       
-        api.put('occupations/'+data.id+'/', data).then(function(response){ // url: occupation/1/ + data
+        occupationService.updateOccupation(data).then(function(response){ // url: occupation/1/ + data
           resolve(response);        
       }).catch(function(error){
           reject(error);

@@ -1,4 +1,4 @@
-import { api,helpers } from './../api.js';
+import * as customerService from './../../services/customers/';
 
 export default {
 
@@ -13,46 +13,45 @@ export default {
   },
 
   actions: {
-    setCustomers({commit}){  // RETRIEVE ALL CUSTOMERS FROM DATABASE AND INSERT IN STATE
-       return new Promise((resolve,reject) => {       
-        api.get('customers/').then(function(response){ // url: customer/
-          commit('SETCUSTOMERS',response.data);
-          resolve(response);        
-      }).catch(function(error){
+    setCustomers({ commit }) {  // RETRIEVE ALL CUSTOMERS FROM DATABASE AND INSERT IN STATE        
+      return new Promise((resolve, reject) => {
+        customerService.getCustomers().then(function (response) { // url: customer/
+          commit('SETCUSTOMERS', response.data);
+          resolve(response);
+        }).catch(function (error) {
           reject(error);
+        });
       });
+    },
+    postCustomer({ commit }, data) {  // INSERT NEW CUSTOMER ON DATABASE
+      return new Promise((resolve, reject) => {
+        customerService.createCustomer(data).then(function (response) { // url: customer/
+          resolve(response);
+        }).catch(function (error) {
+          reject(error);
+        });
 
-     });
-   },
-   postCustomer({commit},data){  // INSERT NEW CUSTOMER ON DATABASE
-     return new Promise((resolve,reject) => {       
-        api.post('customers/', data).then(function(response){ // url: customer/
-          resolve(response);        
-      }).catch(function(error){
-          reject(error);
       });
-
-     });
-   },
-   deleteCustomer({commit},id){
-     return new Promise((resolve,reject) => {       
-        api.delete('customers/'+id+'/').then(function(response){  // url: customer/1/
-          resolve(response);        
-      }).catch(function(error){
+    },
+    deleteCustomer({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        customerService.deleteCustomer(id).then(function (response) {  // url: customer/1/
+          resolve(response);
+        }).catch(function (error) {
           reject(error);
+        });
       });
-    });
-   },
-   updateCustomer({commit},data){  // INSERT NEW CUSTOMER ON DATABASE
-     return new Promise((resolve,reject) => {       
-        api.put('customers/'+data.id+'/', data).then(function(response){ // url: customer/1/ + data
-          resolve(response);        
-      }).catch(function(error){
+    },
+    updateCustomer({ commit }, data) {  // INSERT NEW CUSTOMER ON DATABASE
+      return new Promise((resolve, reject) => {
+        customerService.updateCustomer(data).then(function (response) { // url: customer/1/ + data
+          resolve(response);
+        }).catch(function (error) {
           reject(error);
+        });
       });
-    });
-  }
- },
+    }
+  },
   getters: {
     getCustomers: state => {
       return state.customers;

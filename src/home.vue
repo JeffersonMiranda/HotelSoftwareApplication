@@ -22,18 +22,7 @@ export default {
         AppContent,
         AppFooter,
         Login
-    },
-    data() {
-        return {
-            customers: []
-        }
-    },
-    created: function () {
-        console.log(this.axios.baseURL);
-        this.$customers.getAllCustomers()
-          .then(response => { console.log(response.data) })
     }
 }
-
 
 </script>

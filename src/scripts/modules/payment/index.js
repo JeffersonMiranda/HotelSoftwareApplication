@@ -1,4 +1,4 @@
-import { api,helpers } from './../api.js';
+import * as paymentService from './../../services/payments/';
 
 export default {
 
@@ -15,7 +15,7 @@ export default {
   actions: {
     setPayments({commit}){  // RETRIEVE ALL PAYMENTS FROM DATABASE AND INSERT IN STATE
      return new Promise((resolve,reject) => {       
-        api.get('payments' + helpers.getAll).then(function(response){ // url: payments/
+        paymentService.getPayments().then(function(response){ // url: payments/
           commit('SETPAYMENTS',response.data);
           resolve(response);        
       }).catch(function(error){
@@ -25,7 +25,7 @@ export default {
    },
    postPayment({commit},data){  // INSERT NEW OCCUPATION ON DATABASE
      return new Promise((resolve,reject) => {       
-        api.post('payments/', data).then(function(response){ // url: payments/
+        paymentService.createPayment(data).then(function(response){ // url: payments/
           resolve(response);        
       }).catch(function(error){
           reject(error);          
@@ -35,7 +35,7 @@ export default {
    },
    deletePayment({commit},id){
      return new Promise((resolve,reject) => {       
-        api.delete('payments/'+id+'/').then(function(response){  // url: payments/1/
+        paymentService.deletePayment(id).then(function(response){  // url: payments/1/
           resolve(response);        
       }).catch(function(error){
           reject(error);
@@ -44,7 +44,7 @@ export default {
    },
    updatePayment({commit},data){  // INSERT NEW OCCUPATION ON DATABASE
      return new Promise((resolve,reject) => {       
-        api.put('payments/'+data.id+'/', data).then(function(response){ // url: payments/1/ + data
+          paymentService.updatePayment(data).then(function(response){ // url: payments/1/ + data
           resolve(response);        
       }).catch(function(error){
           reject(error);

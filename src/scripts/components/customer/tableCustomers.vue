@@ -103,7 +103,7 @@ computed: {
      return this.getCustomers;  
   }
 },
-created: function(){
+mounted: function(){
     
     this.setCustomers().then( response => {
         this.loading = false;
