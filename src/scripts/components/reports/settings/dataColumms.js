@@ -1,43 +1,52 @@
 
 export const reportHeaders = {
-    "customerColumms": [
+    "customerColumms": 
         {
-            "title": "ID",
-            "dataKey": "id"
-        },
-        {
-            "title": "First Name",
-            "dataKey": "firstName"
-        },
-        {
-            "title": "Last Name",
-            "dataKey": "lastName"
-        },
-        {
-            "title": "Street",
-            "dataKey": "street"
-        },
-        {
-            "title": "City",
-            "dataKey": "city"
-        },
-        {
-            "title": "Country",
-            "dataKey": "country"
-        },
-        {
-            "title": "Phone Number",
-            "dataKey": "phoneNumber"
-        },
-        {
-            "title": "Age",
-            "dataKey": "age"
-        },
-        {
-            "title": "Sex",
-            "dataKey": "sex"
+            "id": {
+                "title": "ID",
+                "dataKey": "id"
+            },
+            "firstName":
+            {
+                "title": "First Name",
+                "dataKey": "firstName"
+            },
+            "lastName":
+            {
+                "title": "Last Name",
+                "dataKey": "lastName"
+            },
+            "street":
+            {
+                "title": "Street",
+                "dataKey": "street"
+            },
+            "city": {
+                "title": "City",
+                "dataKey": "city"
+            },
+            "country":
+            {
+                "title": "Country",
+                "dataKey": "country"
+            },
+            "phoneNumber":
+            {
+                "title": "Phone Number",
+                "dataKey": "phoneNumber"
+            },
+            "age":
+            {
+                "title": "Age",
+                "dataKey": "age"
+            },
+            "sex":
+            {
+                "title": "Sex",
+                "dataKey": "sex"
+            }
         }
-    ],
+    ,
     "occupationColumms": [
         {
             "title": "ID",
@@ -124,4 +133,4 @@ export const reportHeaders = {
             "dataKey": "occupation"
         }
     ]
-   }
+}

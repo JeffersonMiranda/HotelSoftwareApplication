@@ -15,20 +15,30 @@
                 <b-button variant="primary" @click.prevent="">
                     Generate PDF Report
                 </b-button>
-    
             </form>
-            {{ headers }}
         </div>
+        </br>
+        <div class="row">
+            <fields-selection @headers_data="importHeaders"></fields-selection> <!-- FIELDS COMPONENT TO SELECT FIELDS ON REPORT -->
+        </div>
+        {{ headers }}
     </div>
 </template>
+
 <script>
 
 import { mapActions } from 'vuex';
+import { reportHeaders } from './../settings/dataColumms.js';
+import fieldsSelection from './fieldsSelection.vue';
 
 export default {
-    props: ['headerParameter'],
+
+    components: {
+        fieldsSelection
+    },
     data() {
         return {
+            headers: [], // HEADERS USED IN THE REPORT
             customers: [],
             options: ['Male', 'Female'],
             selectedSex: "",
@@ -36,16 +46,13 @@ export default {
         }
     },
     methods: {
+        importHeaders: function (data) {
+            this.headers = data // RECEIVE CUSTOMER HEADERS FROM CHILD COMPONENT // FIELDS-SELECTION
+        }
+    },
 
-    },
-    computed: {
-        headers : function(){
-            return this.headerParameter.customerColumms
-        } 
-    },
     watch: {
-        allSexes: function () { 
-
+        allSexes: function () {
             var form = document.getElementById("sexSelect");  // DISABLE SEX SELECT
             if (this.allSexes == "true") {
                 form.disabled = true;

@@ -123,7 +123,7 @@
             </div>
     
             <div class="col-md-9">
-                <router-view name="reports_procedure" :dataHeaders="headerParameter"></router-view>
+                <router-view name="reports_procedure"></router-view>
                 <!-- KIND OF REPORTS (CUSTOMERS, ROOMS, OCCUPATIONS...) -->
             </div>
         </div>
@@ -133,19 +133,6 @@
 
 <script>
 
-import { reportHeaders } from './settings/dataColumms.js';
-
-export default {
-   
-    props: {
-        dataHeaders: [] 
-    },
-    computed: {
-       headerParameter : function(){
-           return reportHeaders;
-       } 
-    }
-}
 </script>
 
 <style scoped>
@@ -163,7 +150,6 @@ export default {
     border: none;
     font-size: 14px;
 }
-
 
 .side-menu li button {
     text-decoration: none;
