@@ -11,7 +11,6 @@ export default {
       state.customers = data;
     }
   },
-
   actions: {
     setCustomers({ commit }) {  // RETRIEVE ALL CUSTOMERS FROM DATABASE AND INSERT IN STATE        
       return new Promise((resolve, reject) => {

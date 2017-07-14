@@ -12,54 +12,75 @@
                     All sexes
                 </b-form-checkbox>
     
-                <b-button variant="primary" @click.prevent="">
-                    Generate PDF Report
-                </b-button>
             </form>
         </div>
+    
         </br>
+    
         <div class="row">
-            <fields-selection @headers_data="importHeaders"></fields-selection> <!-- FIELDS COMPONENT TO SELECT FIELDS ON REPORT -->
+            <fields-selection @headers_data="importHeaders"></fields-selection>
+            <!-- FIELDS COMPONENT TO SELECT FIELDS ON REPORT -->
         </div>
-        {{ headers }}
+    
+        <div class="row">
+    
+            <b-button variant="primary" @click.prevent="">
+                Generate PDF Report
+            </b-button>
+    
+        </div>
+
     </div>
 </template>
 
 <script>
 
 import { mapActions } from 'vuex';
-import { reportHeaders } from './../settings/dataColumms.js';
 import fieldsSelection from './fieldsSelection.vue';
+import queryString from 'query-string';
 
 export default {
 
     components: {
         fieldsSelection
     },
-    data() {
+    data() {    
         return {
-            headers: [], // HEADERS USED IN THE REPORT
+            headersUrl: [], // HEADERS USED IN THE REPORT FOR URL
             customers: [],
             options: ['Male', 'Female'],
             selectedSex: "",
-            allSexes: "false"  // ALL SEXES IN THE REPORTS IF TRUE
+            allSexes: "false",  // ALL SEXES IN THE REPORTS IF TRUE AND DISABLE SELECT FIELD IF TRUE
+            urlFilter: "" // URL FILTERS
         }
     },
     methods: {
         importHeaders: function (data) {
-            this.headers = data // RECEIVE CUSTOMER HEADERS FROM CHILD COMPONENT // FIELDS-SELECTION
+            this.headersUrl = data // RECEIVE CUSTOMER HEADERS FROM CHILD COMPONENT // FIELDS-SELECTION
+        },
+        createUrlFilter: function(){
+            if (this.allSexes == "false") {
+              var sexValue = this.selectedSex  
+              this.urlFilter = queryString.stringify({ sex : sexValue});
+            }
+            else if (this.allSexes == "true")  { // NO FILTER IF ALL SEXES IS TRUE
+                this.urlFilter = "";
+            }
         }
     },
-
     watch: {
         allSexes: function () {
-            var form = document.getElementById("sexSelect");  // DISABLE SEX SELECT
-            if (this.allSexes == "true") {
+            var form = document.getElementById("sexSelect");  // GET SELECT SEX ELEMENT
+            this.createUrlFilter();            
+            if (this.allSexes == "true") { // DISABLE SEX SELECT
                 form.disabled = true;
             }
             else {
                 form.disabled = false;
             }
+        },
+        selectedSex: function(){
+            this.createUrlFilter(); 
         }
     }
 }
